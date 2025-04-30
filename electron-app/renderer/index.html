@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>doodool.EXE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <span class="app-title">doodool.EXE</span>
+    </header>
+    <div id="chat-float-icon" class="chat-float-icon" onclick="toggleChatSidebar()">
+        💬
+    </div>
+    <div id="chat-sidebar" class="chat-sidebar minimized">
+        <div class="chat-header">
+            <span>AI Assistant</span>
+            <button class="close-chat" onclick="toggleChatSidebar()">×</button>
+        </div>
+        <div class="chat-body">
+            <!-- Chat content remains here -->
+        </div>
+        <form id="chat-form" class="chat-footer"> <!-- Changed div to form and added ID -->
+            <input type="text" id="chat-input" placeholder="Type a command..."> <!-- Added ID to input -->
+            <button type="submit">Send</button> <!-- Added type="submit" -->
+        </form>
+    </div>
+    <main class="main-content">
+
+    <!-- Auth UI -->
+    <div id="auth-box" style="max-width:340px;margin:40px auto 24px auto;padding:24px 28px 18px 28px;background:#f8f8fa;border-radius:10px;box-shadow:0 1px 12px #0001;display:none;">
+      <h2>Sign in to continue</h2>
+      <button class="oauth-btn" data-provider="google" style="margin:8px 0 8px 0;width:100%;padding:10px 0;background:#4285F4;color:#fff;border:none;border-radius:6px;font-size:1.1em;cursor:pointer;">Sign in with Google</button>
+<button class="oauth-btn" data-provider="twitter" style="margin:8px 0 8px 0;width:100%;padding:10px 0;background:#1da1f2;color:#fff;border:none;border-radius:6px;font-size:1.1em;cursor:pointer;">Sign in with Twitter</button>
+    </div>
+    <div id="user-box" style="max-width:340px;margin:40px auto 24px auto;padding:18px 28px 14px 28px;background:#e8f6e8;border-radius:10px;box-shadow:0 1px 12px #0001;display:none;text-align:center;">
+      <span>Signed in as <b id="user-email"></b></span>
+      <button id="sign-out-btn" style="margin-left:18px;padding:6px 18px;background:#e74c3c;color:#fff;border:none;border-radius:6px;font-size:1em;cursor:pointer;">Sign out</button>
+    </div>
+
+    <div id="disk-permission-modal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(40,42,54,0.85);z-index:100;display:flex;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:32px 32px 24px 32px;border-radius:12px;box-shadow:0 6px 32px #0002;max-width:340px;text-align:center;">
+        <h2>Allow Disk Access</h2>
+        <p>This app needs your permission to scan your disks and analyze space usage. No files will be changed.</p>
+        <button id="grant-disk-access" style="background:#1e90ff;color:#fff;padding:10px 32px;border:none;border-radius:6px;font-size:1.1em;cursor:pointer;margin-top:18px;">Allow Access</button>
+      </div>
+    </div>
+  <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: center; gap: 36px; margin-left: 320px; margin-top: 50px;">
+    <div class="container" id="scan-container" style="display:none;">
+    <h1>doodool.EXE</h1>
+    <div id="scan-history" class="info-box" style="margin-bottom:18px;"></div>
+    <div id="app-guide" class="info-box">
+      <strong>How to use this app:</strong>
+      <ul>
+        <li><b>Chat Sidebar (left):</b> Type commands like <code>search</code>, <code>tag</code>, <code>select</code>, or <code>clear</code> to interact with your folders using natural language. Example: <code>search cache</code>, <code>tag app Adobe</code>.</li>
+        <li><b>Scan Form:</b> Enter a directory path and depth, then click <b>Scan</b> to analyze disk usage.</li>
+        <li><b>Legend:</b> Shows available tags (cache, app, os, custom). Click a tag to filter folders.</li>
+        <li><b>Tree View:</b> Displays your folder structure. Click folder names to select. Tagged folders are color-coded. Use the <b>Tag</b> button to manually tag folders.</li>
+        <li><b>Selection:</b> Selected folders are highlighted. Use chat commands or click to select.</li>
+        <li><b>Commands:</b> <code>search &lt;query&gt;</code> (find folders), <code>tag &lt;tag&gt; &lt;query&gt;</code> (tag folders), <code>select &lt;tag|query&gt;</code> (select by tag or name), <code>clear</code> (clear selection).</li>
+      </ul>
+      <button id="dismiss-guide" style="float:right;margin-top:-38px;margin-right:8px;">✕</button>
+    </div>
+    <form id="scan-form">
+      <input type="text" id="dirPath" placeholder="Enter directory path" required>
+      <label for="depth">Scan Mode</label>
+      <select id="depth">
+        <option value="fast">Fast</option>
+        <option value="deep">Deep</option>
+      </select>
+      <button type="submit">Scan</button>
+    </form>
+    <div id="legend"></div>
+    <div id="tree-view"></div>
+  </div>
+
+  <!-- Minimal Terminal Panel -->
+  <div id="mini-terminal"></div>
+
+  <script>
+    // Dismiss info box
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('dismiss-guide');
+      if (btn) btn.onclick = function() {
+        var box = document.getElementById('app-guide');
+        if (box) box.style.display = 'none';
+      };
+    });
+  </script>
+  <script src="auth.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

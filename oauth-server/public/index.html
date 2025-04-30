@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disk Analyzer AI - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="center-box">
+    <h1>Disk Analyzer AI</h1>
+    <p class="desc">Sign in or create an account to access your AI-powered disk analyzer.</p>
+    <form class="auth-form" method="POST" action="/signin">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+    </form>
+    <hr />
+    <form class="auth-form" method="POST" action="/signup">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="features">
+      <h2>Features</h2>
+      <ul>
+        <li>AI-powered disk space analysis</li>
+        <li>Tag and categorize files/folders</li>
+        <li>Search and filter by type or usage</li>
+        <li>Cross-platform (Windows & Mac)</li>
+        <li>Chat interface for advanced commands</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
